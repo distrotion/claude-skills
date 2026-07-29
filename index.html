@@ -1,0 +1,240 @@
+<title>Skills — command reference</title>
+<style>
+:root{
+  --ink:#1D2733; --ink-soft:#5A6675; --ink-faint:#8794A3;
+  --ground:#EDF0F4; --surface:#FFFFFF; --line:#DCE2EA; --line-soft:#E9EDF2;
+  --accent:#1E6FD9; --accent-soft:#EAF0FE; --pin:#D69E2E;
+  --shadow:0 1px 2px rgba(18,32,48,.06), 0 8px 24px -16px rgba(18,32,48,.25);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#E5EAF0; --ink-soft:#9AA7B6; --ink-faint:#6C7A8A;
+    --ground:#0E141B; --surface:#161E27; --line:#26313D; --line-soft:#1E2731;
+    --accent:#6BA5F5; --accent-soft:#17253A; --pin:#E0B457;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E5EAF0; --ink-soft:#9AA7B6; --ink-faint:#6C7A8A;
+  --ground:#0E141B; --surface:#161E27; --line:#26313D; --line-soft:#1E2731;
+  --accent:#6BA5F5; --accent-soft:#17253A; --pin:#E0B457;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+}
+:root[data-theme="light"]{
+  --ink:#1D2733; --ink-soft:#5A6675; --ink-faint:#8794A3;
+  --ground:#EDF0F4; --surface:#FFFFFF; --line:#DCE2EA; --line-soft:#E9EDF2;
+  --accent:#1E6FD9; --accent-soft:#EAF0FE; --pin:#D69E2E;
+  --shadow:0 1px 2px rgba(18,32,48,.06), 0 8px 24px -16px rgba(18,32,48,.25);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 96px;display:flex;flex-direction:column;gap:30px}
+
+.masthead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px;
+  border-bottom:2px solid var(--ink);padding-bottom:18px}
+.masthead h1{margin:0;font-size:clamp(26px,4vw,38px);font-weight:680;letter-spacing:-.022em;
+  text-wrap:balance;flex:1 1 320px}
+.masthead .sub{color:var(--ink-soft);font-size:13.5px;max-width:42ch}
+.stamp{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-faint)}
+
+.gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.gauge{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gauge b{font-size:22px;font-weight:660;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.gauge span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+  font-family:var(--mono)}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#q{flex:1 1 240px;min-width:0;padding:11px 14px;border:1px solid var(--line);border-radius:9px;
+  background:var(--surface);color:var(--ink);font:inherit;font-size:14px}
+#q::placeholder{color:var(--ink-faint)}
+select,button.ghost{padding:10px 12px;border:1px solid var(--line);border-radius:9px;
+  background:var(--surface);color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums;
+  margin-left:auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.group{display:flex;flex-direction:column;gap:12px}
+.group-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.group-head h2{margin:0;font-size:13px;font-weight:640;letter-spacing:.1em;text-transform:uppercase}
+.group-head p{margin:0;color:var(--ink-soft);font-size:13px}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;
+  color:var(--ink-soft);background:var(--accent-soft);border:1px solid var(--line);
+  border-radius:999px;padding:5px 12px;width:fit-content}
+.chain i{font-style:normal;color:var(--accent)}
+
+.rows{display:flex;flex-direction:column;gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:var(--shadow)}
+.row{background:var(--surface);padding:14px 16px;display:grid;
+  grid-template-columns:28px minmax(150px,210px) 1fr auto;gap:4px 16px;align-items:start}
+.row:hover{background:var(--accent-soft)}
+.pin{grid-row:span 2;border:0;background:none;cursor:pointer;font-size:15px;line-height:1;
+  padding:2px;color:var(--ink-faint);border-radius:6px}
+.pin[aria-pressed="true"]{color:var(--pin)}
+.name{font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--accent);word-break:break-word}
+.what{color:var(--ink-soft);font-size:13.5px;margin:0}
+.move{font-family:var(--mono);font-size:11px;color:var(--ink-faint);max-width:150px}
+.say{grid-column:3 / -1;display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.say code{font-family:var(--mono);font-size:11.5px;background:var(--ground);color:var(--ink-soft);
+  border:1px solid var(--line-soft);border-radius:6px;padding:2.5px 8px;white-space:nowrap;cursor:copy}
+.say code:hover{border-color:var(--accent);color:var(--accent)}
+
+.foot{border-top:1px solid var(--line);padding-top:16px;color:var(--ink-faint);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot code{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:11px;padding:26px;
+  text-align:center;color:var(--ink-faint);font-size:13.5px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);
+  color:var(--ground);font-family:var(--mono);font-size:12px;padding:8px 14px;border-radius:8px;
+  opacity:0;pointer-events:none}
+.toast.on{opacity:1}
+@media (max-width:660px){
+  .row{grid-template-columns:26px 1fr;gap:4px 12px}
+  .what,.say{grid-column:2 / -1}
+  .move{grid-column:2 / -1;max-width:none;margin-top:6px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .row{transition:background .12s ease}
+  .toast{transition:opacity .18s ease}
+}
+</style>
+<div class="wrap">
+<header class="masthead">
+<h1>Skills — command reference</h1>
+<div class="sub">Everything Claude can run on this Mac, and the words that start it. Type the phrase in chat — no slash needed.</div>
+<div class="stamp">generated 2026-07-29 07:57</div>
+</header>
+<section class="gauges">
+<div class="gauge"><b>18</b><span>skills installed</span></div>
+<div class="gauge"><b>1242</b><span>tokens per session</span></div>
+<div class="gauge"><b>4</b><span>default groups</span></div>
+<div class="gauge"><b>pin</b><span>saved in this browser</span></div>
+</section>
+<div class="tools">
+<input id="q" type="search" placeholder="Filter by name, purpose, or trigger phrase…" aria-label="Filter skills">
+<select id="mode" aria-label="Grouping"><option value="flow">Group: workflow</option><option value="custom">Group: mine</option><option value="az">Group: A–Z</option></select>
+<button class="ghost" id="reset" type="button">Reset</button>
+<span class="count" id="count">18 skills</span>
+</div>
+<main id="app"></main>
+<footer class="foot">
+<span>Source of truth: <code>~/.claude/skills/*/SKILL.md</code></span>
+<span>Rebuild: <code>python3 ~/.claude/skills-doc.py</code></span>
+<span>Pins and groups stay in this browser</span>
+</footer></div>
+<div class="toast" id="toast" role="status"></div>
+<script>const DATA=[{"title": "Ship a unit", "blurb": "build, test on the machine, push — the daily plant workflow", "chain": ["localtest", "localtest-end", "buildup"], "skills": [{"name": "localtest", "summary": "Run the whole system (Node backend + built Flutter web) on the machine like production before deploy (real built asset, not debug/hot-reload)", "triggers": ["localtest <unit>", "โลคอลเทส", "ทดสอบก่อนขึ้นจริง", "รัน built front + backend บนเครื่อง"]}, {"name": "localtest-end", "summary": "Close a running localtest — kill backend+front, free the ports, restore UI config that points at localhost back to the real server. The closing counterpart of localtest", "triggers": ["localtest-end", "ปิด/หยุด/จบ localtest", "เลิกเทสแล้ว"]}, {"name": "buildup", "summary": "Deploy pipeline for Flutter web + Node: build → deploy into the DEPLOY repo → push 2 gits", "triggers": ["buildup <unit>", "buildup all", "บิลด์อัพ", "อัพขึ้นจริง"]}, {"name": "pushcode", "summary": "Commit + push source code to git safely (prevent secret/.env/build/node_modules leaks, verb-first message, pull --rebase before push). Separate from buildup (which pushes only DEPLOY)", "triggers": ["push code", "push ขึ้น git", "ดันโค้ดขึ้น", "commit แล้ว push"]}, {"name": "envlocal", "summary": "View/adjust `.env.local` + endpoint config as a table (each endpoint points to localhost or the real server) before/during localtest", "triggers": ["envlocal", "ดู .env.local", "config endpoint ชี้ไปไหน", "ปรับ env local"]}, {"name": "new-unit", "summary": "Create a new unit/plant from a clone (backend+UI+deploy), change all port/IP/names + grep old values down to 0 + add to the buildup/localtest table", "triggers": ["new unit", "สร้าง plant ใหม่", "clone unit ... เป็น ...", "เพิ่มหน่วยงานใหม่"]}]}, {"title": "Hold the standard", "blurb": "audit code against the central standard, then fix it", "chain": ["check-code-std", "convert-to-std"], "skills": [{"name": "gen-flutter-std", "summary": "Check Flutter performance against the FL- section in PERFORMANCE-STANDARD.md → report PASS/WARN/FAIL. Check only, no code changes", "triggers": ["gen flutter std", "ตรวจ flutter std", "audit flutter performance"]}, {"name": "gen-nodejs-std", "summary": "Check Node/Express backend performance against the ND- section → report PASS/WARN/FAIL. Check only, no code changes", "triggers": ["gen nodejs std", "ตรวจ node std", "audit backend performance"]}, {"name": "gen-flutter-nodejs-std", "summary": "Check fullstack performance (Flutter+Node) against FL-/ND-/FS- + the connection points + reference app T1–T5. Check/produce a spec, no code changes", "triggers": ["gen flutter+nodejs std", "ตรวจ fullstack std", "audit ระบบทั้ง front+back"]}, {"name": "check-code-std", "summary": "Audit code against the central standards (framework std + perf FL-/ND-/FS- + noti/login + security) and plan the fixes, before handing off to convert-to-std. Check + plan only, no code changes", "triggers": ["check code std", "ตรวจโค้ดตามมาตรฐาน", "audit code std", "เช็คโค้ดเทียบ std แล้ววางแผน"]}, {"name": "convert-to-std", "summary": "Actually change code to pass the performance standard (the FAIL items from gen ... std) — pilot one unit at a time + localtest before propagating. Unlike gen ... std, which only checks", "triggers": ["convert to std", "แก้ให้ผ่าน std", "fix ตามมาตรฐาน performance"]}]}, {"title": "How Claude answers", "blurb": "reply length and working discipline", "chain": [], "skills": [{"name": "terse", "summary": "Turn terse reply mode ON or OFF (short, low-token replies — no tables/decoration, still correct grammar)", "triggers": ["terse on", "terse off", "terse", "ตอบสั้น", "เปิดโหมดสั้น", "ปิดโหมดสั้น"]}, {"name": "caveman", "summary": "Turn caveman reply mode ON or OFF — ultra-short caveman speech to cut output tokens hard (\"file big. me fix. test pass.\")", "triggers": ["file big. me fix. test pass.", "caveman on", "caveman off", "caveman", "โหมดมนุษย์ถ้ำ"]}, {"name": "stop-slop", "summary": "Guard against AI slop and scope creep in one pass: cut filler/over-engineering/invented abstractions, and refuse work outside what was asked", "triggers": ["stop slop", "stop slope", "no slop", "อย่าบานปลาย", "ทำเฉพาะที่สั่ง", "เอาแบบไม่มโน"]}]}, {"title": "Manage the setup", "blurb": "what Claude remembers, what is running, what tools exist", "chain": [], "skills": [{"name": "claude-mem", "summary": "Inspect and manage what Claude loads every session — memory files, MEMORY.md index, CLAUDE.md — with a size/token report, plus add, prune, consolidate", "triggers": ["claude mem", "ดู memory", "จำอะไรไว้บ้าง", "ล้าง memory", "เพิ่ม memory", "memory status"]}, {"name": "task-observer", "summary": "Show what background work is running right now — subagents, workflows, background shell tasks, monitors — with status, elapsed time, and what is stuck", "triggers": ["task observer", "งานที่รันอยู่", "เช็คงานเบื้องหลัง", "workflow ถึงไหนแล้ว", "อะไรค้างอยู่"]}, {"name": "find-skill", "summary": "Find the right skill for a job — search installed skills first, then marketplaces, and say plainly if none fits (and whether to build one)", "triggers": ["find skill", "หา skill", "มี skill อะไรบ้าง", "skill ไหนใช้ดี", "skill for ..."]}, {"name": "dohandoff", "summary": "Summarize a session into a handoff document (what was done, design rationale, status, how to continue) so a person/AI can take over", "triggers": ["dohandoff", "ทำ handoff", "สรุปส่งต่องาน", "เขียน doc ให้คนอื่นทำต่อ"]}]}];
+const KEY = 'skills-doc-v1';
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
+let state = load();
+state.pinned = state.pinned || [];
+state.custom = state.custom || {};      // skill name -> custom group name
+state.mode   = state.mode   || 'flow';  // flow | custom | az
+const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+
+const app = document.getElementById('app');
+const q = document.getElementById('q');
+const modeSel = document.getElementById('mode');
+const counter = document.getElementById('count');
+const toastEl = document.getElementById('toast');
+modeSel.value = state.mode;
+
+const all = DATA.flatMap(g => g.skills.map(s => ({ ...s, home: g.title })));
+const groupNames = () => [...new Set([...DATA.map(g => g.title), ...Object.values(state.custom)])];
+
+function toast(msg){
+  toastEl.textContent = msg; toastEl.classList.add('on');
+  clearTimeout(toast.t); toast.t = setTimeout(() => toastEl.classList.remove('on'), 1400);
+}
+
+function buildSections(){
+  const term = q.value.trim().toLowerCase();
+  const match = s => !term || (s.name + ' ' + s.summary + ' ' + s.triggers.join(' ')).toLowerCase().includes(term);
+  const visible = all.filter(match);
+  const pinned = visible.filter(s => state.pinned.includes(s.name));
+  const rest = visible.filter(s => !state.pinned.includes(s.name));
+  const out = [];
+  if (pinned.length) out.push({ title: 'Pinned', blurb: 'your shortlist — click the star to remove', chain: [], skills: pinned });
+
+  if (state.mode === 'az'){
+    out.push({ title: 'A–Z', blurb: 'every skill, alphabetical', chain: [],
+               skills: [...rest].sort((a,b) => a.name.localeCompare(b.name)) });
+  } else if (state.mode === 'custom'){
+    const buckets = {};
+    rest.forEach(s => { const g = state.custom[s.name] || 'Unsorted'; (buckets[g] = buckets[g] || []).push(s); });
+    Object.keys(buckets).sort().forEach(t => out.push({ title: t, blurb: 'your grouping', chain: [], skills: buckets[t] }));
+  } else {
+    DATA.forEach(g => {
+      const skills = rest.filter(s => s.home === g.title);
+      if (skills.length) out.push({ ...g, skills });
+    });
+  }
+  counter.textContent = visible.length + (visible.length === 1 ? ' skill' : ' skills');
+  return out;
+}
+
+function render(){
+  const sections = buildSections();
+  app.innerHTML = '';
+  if (!sections.length){
+    app.innerHTML = '<div class="empty">No skill matches that. Say <code>find skill</code> in chat and Claude will look further.</div>';
+    return;
+  }
+  const names = groupNames();
+  sections.forEach(sec => {
+    const el = document.createElement('section');
+    el.className = 'group';
+    const chain = sec.chain && sec.chain.length
+      ? `<div class="chain">${sec.chain.map(c => c).join(' <i>&rarr;</i> ')}</div>` : '';
+    el.innerHTML = `<div class="group-head"><h2>${esc(sec.title)}</h2><p>${esc(sec.blurb)}</p></div>${chain}
+      <div class="rows"></div>`;
+    const rows = el.querySelector('.rows');
+    sec.skills.forEach(s => {
+      const on = state.pinned.includes(s.name);
+      const row = document.createElement('article');
+      row.className = 'row';
+      row.innerHTML = `
+        <button class="pin" aria-pressed="${on}" title="${on ? 'Unpin' : 'Pin to top'}">${on ? '★' : '☆'}</button>
+        <div class="name">${esc(s.name)}</div>
+        <p class="what">${esc(s.summary)}</p>
+        <select class="move" title="Move to a group">
+          ${names.map(n => `<option${(state.custom[s.name] || s.home) === n ? ' selected' : ''}>${esc(n)}</option>`).join('')}
+          <option value="__new">+ new group…</option>
+        </select>
+        <div class="say">${s.triggers.slice(0,6).map(t => `<code title="Click to copy">${esc(t)}</code>`).join('')}</div>`;
+      row.querySelector('.pin').onclick = () => {
+        state.pinned = on ? state.pinned.filter(n => n !== s.name) : [...state.pinned, s.name];
+        save(); render(); toast(on ? 'Unpinned ' + s.name : 'Pinned ' + s.name);
+      };
+      row.querySelector('.move').onchange = e => {
+        let g = e.target.value;
+        if (g === '__new'){
+          g = (prompt('New group name') || '').trim();
+          if (!g){ render(); return; }
+        }
+        state.custom[s.name] = g; state.mode = 'custom'; modeSel.value = 'custom';
+        save(); render(); toast(s.name + ' → ' + g);
+      };
+      row.querySelectorAll('.say code').forEach(c => {
+        c.onclick = () => { navigator.clipboard?.writeText(c.textContent); toast('Copied: ' + c.textContent); };
+      });
+      rows.appendChild(row);
+    });
+    app.appendChild(el);
+  });
+}
+
+function esc(t){ return String(t).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+q.addEventListener('input', render);
+modeSel.addEventListener('change', () => { state.mode = modeSel.value; save(); render(); });
+document.getElementById('reset').onclick = () => {
+  if (!confirm('Clear your pins and custom groups?')) return;
+  state = { pinned: [], custom: {}, mode: 'flow' }; modeSel.value = 'flow'; save(); render(); toast('Reset');
+};
+render();
+</script>
