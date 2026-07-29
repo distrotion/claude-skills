@@ -17,22 +17,44 @@ SKILLS_DIR = HOME / ".claude" / "skills"
 OUT_MD = HOME / ".claude" / "SKILLS.md"
 OUT_HTML = HOME / ".claude" / "skills.html"
 
+# Thai one-liners for humans. Kept here, NOT in SKILL.md, so they cost no session tokens.
+TH = {
+ "buildup":"บิลด์ Flutter web แล้ว deploy ขึ้น repo DEPLOY + push ทั้ง 2 git",
+ "localtest":"รันทั้งระบบบนเครื่องแบบ production (built asset จริง) ก่อน deploy",
+ "localtest-end":"ปิด localtest ให้สะอาด คืนพอร์ต + คืน config UI ที่ชี้ localhost",
+ "pushcode":"commit + push โค้ดต้นทางอย่างปลอดภัย กัน secret/build หลุด",
+ "envlocal":"ดูตารางว่า endpoint ไหนชี้ localhost / ชี้ server จริง แล้วปรับได้",
+ "new-unit":"สร้าง plant ใหม่จาก clone เปลี่ยน port/IP/ชื่อครบ + grep ค่าเก่าเหลือ 0",
+ "gen-flutter-std":"ตรวจ performance ฝั่ง Flutter ตามเกณฑ์ FL- ออกรายงาน PASS/WARN/FAIL",
+ "gen-nodejs-std":"ตรวจ performance ฝั่ง Node ตามเกณฑ์ ND-",
+ "gen-flutter-nodejs-std":"ตรวจทั้งระบบ FL-+ND-+FS- และเทียบ reference app T1–T5",
+ "check-code-std":"audit 5 มิติ (โครง/perf/noti-login/security/cross-check) แล้ววางแผนแก้",
+ "convert-to-std":"ลงมือแก้โค้ดจริงให้ผ่านเกณฑ์ นำร่องทีละ unit + localtest ก่อนขยาย",
+ "terse":"สลับโหมดตอบสั้น ประหยัด token ~40-50% ต่อคำตอบ",
+ "caveman":"โหมดมนุษย์ถ้ำ ตอบสั้นสุด ประหยัด ~60-70%",
+ "stop-slop":"กันงานมโน/ฟุ่มเฟือย + กันงานบานปลายเกินที่สั่ง",
+ "claude-mem":"ดู/จัดการสิ่งที่ Claude จำไว้ + บอกว่ากิน token เท่าไรต่อ session",
+ "task-observer":"ดูงานเบื้องหลังทั้งหมดที่รันอยู่ + ตัวไหนค้าง",
+ "find-skill":"หา skill ที่ตรงกับงาน ในเครื่องก่อน แล้วค่อยหาใน marketplace",
+ "dohandoff":"สรุป session เป็นเอกสารส่งต่อ ให้คน/AI อ่านแล้วทำต่อได้",
+}
+
 # Default group order = how the work actually flows, not alphabetical.
 GROUPS = [
-    ("Ship a unit", "build, test on the machine, push — the daily plant workflow",
+    ("งานประจำวัน — ส่งขึ้นจริง", "บิลด์ · ทดสอบบนเครื่อง · push ขึ้น git",
      ["localtest", "localtest-end", "buildup", "pushcode", "envlocal", "new-unit"]),
-    ("Hold the standard", "audit code against the central standard, then fix it",
+    ("มาตรฐานโค้ด", "ตรวจโค้ดเทียบมาตรฐานกลาง แล้วแก้ให้ผ่าน",
      ["gen-flutter-std", "gen-nodejs-std", "gen-flutter-nodejs-std", "check-code-std", "convert-to-std"]),
-    ("How Claude answers", "reply length and working discipline",
+    ("วิธีที่ Claude ตอบ", "ความยาวคำตอบ และวินัยการทำงาน",
      ["terse", "caveman", "stop-slop"]),
-    ("Manage the setup", "what Claude remembers, what is running, what tools exist",
+    ("จัดการระบบ", "ความจำ · งานเบื้องหลัง · เครื่องมือที่มี",
      ["claude-mem", "task-observer", "find-skill", "dohandoff"]),
 ]
 
 # Real sequences worth drawing as a chain (order carries meaning).
 CHAINS = {
-    "Ship a unit": ["localtest", "localtest-end", "buildup"],
-    "Hold the standard": ["check-code-std", "convert-to-std"],
+    "งานประจำวัน — ส่งขึ้นจริง": ["localtest", "localtest-end", "buildup"],
+    "มาตรฐานโค้ด": ["check-code-std", "convert-to-std"],
 }
 
 
@@ -52,7 +74,7 @@ def parse_skill(path: pathlib.Path):
     triggers = [t for t in re.findall(r'"([^"]+)"', body) if t.lower() != "skill"]
     summary = re.split(r"\s*Trigger:|\s*Toggle:", body)[0].strip().rstrip(".")
     return {"name": name.group(1).strip() if name else path.parent.name,
-            "summary": summary, "triggers": triggers}
+            "summary": TH.get(name.group(1).strip() if name else path.parent.name, summary), "triggers": triggers}
 
 
 def est_tokens(text: str) -> int:
@@ -76,8 +98,8 @@ def collect():
                             "skills": rows})
     rest = [s for n, s in found.items() if n not in seen]
     if rest:
-        ordered.append({"title": "Not grouped yet",
-                        "blurb": "newly added — sort it into a group once its use settles",
+        ordered.append({"title": "ยังไม่จัดกลุ่ม",
+                        "blurb": "เพิ่งเพิ่มเข้ามา — จัดกลุ่มเมื่อรู้ว่าใช้ยังไง",
                         "chain": [], "skills": rest})
     return ordered, total
 
@@ -233,22 +255,22 @@ function buildSections(){
   const pinned = visible.filter(s => state.pinned.includes(s.name));
   const rest = visible.filter(s => !state.pinned.includes(s.name));
   const out = [];
-  if (pinned.length) out.push({ title: 'Pinned', blurb: 'your shortlist — click the star to remove', chain: [], skills: pinned });
+  if (pinned.length) out.push({ title: 'ปักหมุดไว้', blurb: 'รายการที่ใช้บ่อย — กดดาวเพื่อเอาออก', chain: [], skills: pinned });
 
   if (state.mode === 'az'){
-    out.push({ title: 'A–Z', blurb: 'every skill, alphabetical', chain: [],
+    out.push({ title: 'เรียงตามตัวอักษร', blurb: 'ทุก skill เรียง A–Z', chain: [],
                skills: [...rest].sort((a,b) => a.name.localeCompare(b.name)) });
   } else if (state.mode === 'custom'){
     const buckets = {};
-    rest.forEach(s => { const g = state.custom[s.name] || 'Unsorted'; (buckets[g] = buckets[g] || []).push(s); });
-    Object.keys(buckets).sort().forEach(t => out.push({ title: t, blurb: 'your grouping', chain: [], skills: buckets[t] }));
+    rest.forEach(s => { const g = state.custom[s.name] || 'ยังไม่จัด'; (buckets[g] = buckets[g] || []).push(s); });
+    Object.keys(buckets).sort().forEach(t => out.push({ title: t, blurb: 'กลุ่มที่คุณจัดเอง', chain: [], skills: buckets[t] }));
   } else {
     DATA.forEach(g => {
       const skills = rest.filter(s => s.home === g.title);
       if (skills.length) out.push({ ...g, skills });
     });
   }
-  counter.textContent = visible.length + (visible.length === 1 ? ' skill' : ' skills');
+  counter.textContent = visible.length + (visible.length === 1 ? ' skill' : ' skill');
   return out;
 }
 
@@ -273,29 +295,29 @@ function render(){
       const row = document.createElement('article');
       row.className = 'row';
       row.innerHTML = `
-        <button class="pin" aria-pressed="${on}" title="${on ? 'Unpin' : 'Pin to top'}">${on ? '★' : '☆'}</button>
+        <button class="pin" aria-pressed="${on}" title="${on ? 'เอาหมุดออก' : 'ปักหมุดขึ้นบน'}">${on ? '★' : '☆'}</button>
         <div class="name">${esc(s.name)}</div>
         <p class="what">${esc(s.summary)}</p>
-        <select class="move" title="Move to a group">
+        <select class="move" title="ย้ายไปกลุ่มอื่น">
           ${names.map(n => `<option${(state.custom[s.name] || s.home) === n ? ' selected' : ''}>${esc(n)}</option>`).join('')}
           <option value="__new">+ new group…</option>
         </select>
-        <div class="say">${s.triggers.slice(0,6).map(t => `<code title="Click to copy">${esc(t)}</code>`).join('')}</div>`;
+        <div class="say">${s.triggers.slice(0,6).map(t => `<code title="คลิกเพื่อคัดลอก">${esc(t)}</code>`).join('')}</div>`;
       row.querySelector('.pin').onclick = () => {
         state.pinned = on ? state.pinned.filter(n => n !== s.name) : [...state.pinned, s.name];
-        save(); render(); toast(on ? 'Unpinned ' + s.name : 'Pinned ' + s.name);
+        save(); render(); toast(on ? 'เอาหมุดออก: ' + s.name : 'ปักหมุด: ' + s.name);
       };
       row.querySelector('.move').onchange = e => {
         let g = e.target.value;
         if (g === '__new'){
-          g = (prompt('New group name') || '').trim();
+          g = (prompt('ชื่อกลุ่มใหม่') || '').trim();
           if (!g){ render(); return; }
         }
         state.custom[s.name] = g; state.mode = 'custom'; modeSel.value = 'custom';
         save(); render(); toast(s.name + ' → ' + g);
       };
       row.querySelectorAll('.say code').forEach(c => {
-        c.onclick = () => { navigator.clipboard?.writeText(c.textContent); toast('Copied: ' + c.textContent); };
+        c.onclick = () => { navigator.clipboard?.writeText(c.textContent); toast('คัดลอกแล้ว: ' + c.textContent); };
       });
       rows.appendChild(row);
     });
@@ -308,8 +330,8 @@ function esc(t){ return String(t).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&l
 q.addEventListener('input', render);
 modeSel.addEventListener('change', () => { state.mode = modeSel.value; save(); render(); });
 document.getElementById('reset').onclick = () => {
-  if (!confirm('Clear your pins and custom groups?')) return;
-  state = { pinned: [], custom: {}, mode: 'flow' }; modeSel.value = 'flow'; save(); render(); toast('Reset');
+  if (!confirm('ล้างหมุดและกลุ่มที่จัดเองทั้งหมด?')) return;
+  state = { pinned: [], custom: {}, mode: 'flow' }; modeSel.value = 'flow'; save(); render(); toast('ล้างค่าแล้ว');
 };
 render();
 """
@@ -318,33 +340,57 @@ render();
 def write_html(groups, total, count, stamp):
     data = json.dumps(groups, ensure_ascii=False)
     parts = [
-        "<title>Skills — command reference</title>",
+        "<title>คู่มือ Skill — Claude Code</title>",
         f"<style>{CSS}</style>",
         '<div class="wrap">',
         '<header class="masthead">',
-        "<h1>Skills — command reference</h1>",
-        '<div class="sub">Everything Claude can run on this Mac, and the words that start it. '
-        "Type the phrase in chat — no slash needed.</div>",
-        f'<div class="stamp">generated {stamp}</div>',
+        "<h1>คู่มือ Skill ของ Claude</h1>",
+        '<div class="sub">ทุกคำสั่งที่ Claude ทำได้บนเครื่องนี้ และคำที่ใช้เรียก '
+        "— พิมพ์ในแชตได้เลย ไม่ต้องมี /</div>",
+        f'<div class="stamp">อัปเดต {stamp}</div>',
         "</header>",
         '<section class="gauges">',
-        f'<div class="gauge"><b>{count}</b><span>skills installed</span></div>',
-        f'<div class="gauge"><b>{total}</b><span>tokens per session</span></div>',
-        f'<div class="gauge"><b>{len(groups)}</b><span>default groups</span></div>',
-        '<div class="gauge"><b>pin</b><span>saved in this browser</span></div>',
+        f'<div class="gauge"><b>{count}</b><span>skill ที่ลงไว้</span></div>',
+        f'<div class="gauge"><b>{total}</b><span>tokens ต่อ session</span></div>',
+        f'<div class="gauge"><b>{len(groups)}</b><span>กลุ่มเริ่มต้น</span></div>',
+        '<div class="gauge"><b>ปักหมุด</b><span>จำไว้ในเบราว์เซอร์</span></div>',
         "</section>",
         '<div class="tools">',
-        '<input id="q" type="search" placeholder="Filter by name, purpose, or trigger phrase…" aria-label="Filter skills">',
-        '<select id="mode" aria-label="Grouping"><option value="flow">Group: workflow</option>'
-        '<option value="custom">Group: mine</option><option value="az">Group: A–Z</option></select>',
-        '<button class="ghost" id="reset" type="button">Reset</button>',
-        f'<span class="count" id="count">{count} skills</span>',
+        '<input id="q" type="search" placeholder="ค้นหา… ชื่อ หน้าที่ หรือคำสั่งเรียก" aria-label="ค้นหา skill">',
+        '<select id="mode" aria-label="Grouping"><option value="flow">จัดกลุ่ม: ตามงาน</option>'
+        '<option value="custom">จัดกลุ่ม: ของฉัน</option><option value="az">จัดกลุ่ม: ก-Z</option></select>',
+        '<button class="ghost" id="reset" type="button">ล้างค่า</button>',
+        f'<span class="count" id="count">{count} skill</span>',
         "</div>",
         '<main id="app"></main>',
+        '<section class="group"><div class="group-head"><h2>สรุปการตั้งค่า</h2>'
+        '<p>สิ่งที่ทำไว้ให้ประหยัด token และของที่เพิ่งลงเพิ่ม</p></div>'
+        '<div class="rows">'
+        '<article class="row"><div></div><div class="name">ต้นทุนต่อ session</div>'
+        '<p class="what">เอกสารกลาง (CLAUDE.md + คำอธิบาย skill) เดิม ~13,050 tokens ทุกครั้งที่เปิดแชต '
+        'ตัดเหลือ ~6,600 โดยแปลเป็นอังกฤษ (ไทยกิน token ~3 เท่า) และย้ายรายละเอียดที่ซ้ำไปไว้ใน skill '
+        'ที่โหลดเฉพาะตอนใช้ — ลดลงประมาณครึ่งหนึ่ง</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">โหมดตอบสั้น</div>'
+        '<p class="what">พิมพ์ <code>terse on</code> ลดความยาวคำตอบ ~40-50% · <code>caveman on</code> ลด ~60-70% · '
+        '<code>off</code> กลับปกติ · เปิดโหมดไหนอยู่จะมีเครื่องหมายบรรทัดแรกของทุกคำตอบ</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">plugin ที่ลงเพิ่ม 18 ตัว</div>'
+        '<p class="what">frontend-design · claude-md-management · claude-code-setup · code-review · code-simplifier · '
+        'code-modernization · feature-dev · pr-review-toolkit · hookify · plugin-dev · mcp-server-dev · agent-sdk-dev · '
+        'project-artifact · session-report · security-guidance · skill-creator · explanatory-output-style · '
+        'learning-output-style — ทั้งหมดฟรี ไม่ต้องต่อบริการภายนอก</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">ที่ไม่ได้ลง</div>'
+        '<p class="what">LSP ของภาษาที่ไม่ได้ใช้ (clangd, gopls, java, kotlin, php, ruby, rust, swift) และตัวที่ต้องต่อ '
+        'บริการภายนอก/มีค่าใช้จ่าย (asana, linear, greptile, firebase, gitlab, discord, telegram) — สั่งเพิ่มได้ทีหลัง</p>'
+        '<div></div></article>'
+        '<article class="row"><div></div><div class="name">ปิดของที่ไม่ใช้</div>'
+        '<p class="what">skill ที่มากับระบบและไม่เคยใช้ (docx, xlsx, morning, loop, init, review…) ปิดได้ที่ '
+        '<code>~/.claude/settings.json</code> ด้วย <code>skillOverrides</code> ค่า <code>off</code> หรือ '
+        '<code>name-only</code> — ประหยัดได้อีก ~1,100 tokens ต่อ session และย้อนกลับได้ทันที</p><div></div></article>'
+        '</div></section>',
         '<footer class="foot">',
-        "<span>Source of truth: <code>~/.claude/skills/*/SKILL.md</code></span>",
-        "<span>Rebuild: <code>python3 ~/.claude/skills-doc.py</code></span>",
-        "<span>Pins and groups stay in this browser</span>",
+        "<span>ต้นทาง: <code>~/.claude/skills/*/SKILL.md</code></span>",
+        "<span>สร้างใหม่: <code>~/.claude/skills-publish.sh</code></span>",
+        "<span>หมุดและกลุ่มเก็บไว้ในเบราว์เซอร์นี้</span>",
         "</footer></div>",
         '<div class="toast" id="toast" role="status"></div>',
         f"<script>const DATA={data};{JS}</script>",

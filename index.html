@@ -1,4 +1,4 @@
-<title>Skills — command reference</title>
+<title>คู่มือ Skill — Claude Code</title>
 <style>
 :root{
   --ink:#1D2733; --ink-soft:#5A6675; --ink-faint:#8794A3;
@@ -104,30 +104,31 @@ select,button.ghost{padding:10px 12px;border:1px solid var(--line);border-radius
 </style>
 <div class="wrap">
 <header class="masthead">
-<h1>Skills — command reference</h1>
-<div class="sub">Everything Claude can run on this Mac, and the words that start it. Type the phrase in chat — no slash needed.</div>
-<div class="stamp">generated 2026-07-29 07:57</div>
+<h1>คู่มือ Skill ของ Claude</h1>
+<div class="sub">ทุกคำสั่งที่ Claude ทำได้บนเครื่องนี้ และคำที่ใช้เรียก — พิมพ์ในแชตได้เลย ไม่ต้องมี /</div>
+<div class="stamp">อัปเดต 2026-07-29 08:12</div>
 </header>
 <section class="gauges">
-<div class="gauge"><b>18</b><span>skills installed</span></div>
-<div class="gauge"><b>1242</b><span>tokens per session</span></div>
-<div class="gauge"><b>4</b><span>default groups</span></div>
-<div class="gauge"><b>pin</b><span>saved in this browser</span></div>
+<div class="gauge"><b>18</b><span>skill ที่ลงไว้</span></div>
+<div class="gauge"><b>1285</b><span>tokens ต่อ session</span></div>
+<div class="gauge"><b>4</b><span>กลุ่มเริ่มต้น</span></div>
+<div class="gauge"><b>ปักหมุด</b><span>จำไว้ในเบราว์เซอร์</span></div>
 </section>
 <div class="tools">
-<input id="q" type="search" placeholder="Filter by name, purpose, or trigger phrase…" aria-label="Filter skills">
-<select id="mode" aria-label="Grouping"><option value="flow">Group: workflow</option><option value="custom">Group: mine</option><option value="az">Group: A–Z</option></select>
-<button class="ghost" id="reset" type="button">Reset</button>
-<span class="count" id="count">18 skills</span>
+<input id="q" type="search" placeholder="ค้นหา… ชื่อ หน้าที่ หรือคำสั่งเรียก" aria-label="ค้นหา skill">
+<select id="mode" aria-label="Grouping"><option value="flow">จัดกลุ่ม: ตามงาน</option><option value="custom">จัดกลุ่ม: ของฉัน</option><option value="az">จัดกลุ่ม: ก-Z</option></select>
+<button class="ghost" id="reset" type="button">ล้างค่า</button>
+<span class="count" id="count">18 skill</span>
 </div>
 <main id="app"></main>
+<section class="group"><div class="group-head"><h2>สรุปการตั้งค่า</h2><p>สิ่งที่ทำไว้ให้ประหยัด token และของที่เพิ่งลงเพิ่ม</p></div><div class="rows"><article class="row"><div></div><div class="name">ต้นทุนต่อ session</div><p class="what">เอกสารกลาง (CLAUDE.md + คำอธิบาย skill) เดิม ~13,050 tokens ทุกครั้งที่เปิดแชต ตัดเหลือ ~6,600 โดยแปลเป็นอังกฤษ (ไทยกิน token ~3 เท่า) และย้ายรายละเอียดที่ซ้ำไปไว้ใน skill ที่โหลดเฉพาะตอนใช้ — ลดลงประมาณครึ่งหนึ่ง</p><div></div></article><article class="row"><div></div><div class="name">โหมดตอบสั้น</div><p class="what">พิมพ์ <code>terse on</code> ลดความยาวคำตอบ ~40-50% · <code>caveman on</code> ลด ~60-70% · <code>off</code> กลับปกติ · เปิดโหมดไหนอยู่จะมีเครื่องหมายบรรทัดแรกของทุกคำตอบ</p><div></div></article><article class="row"><div></div><div class="name">plugin ที่ลงเพิ่ม 18 ตัว</div><p class="what">frontend-design · claude-md-management · claude-code-setup · code-review · code-simplifier · code-modernization · feature-dev · pr-review-toolkit · hookify · plugin-dev · mcp-server-dev · agent-sdk-dev · project-artifact · session-report · security-guidance · skill-creator · explanatory-output-style · learning-output-style — ทั้งหมดฟรี ไม่ต้องต่อบริการภายนอก</p><div></div></article><article class="row"><div></div><div class="name">ที่ไม่ได้ลง</div><p class="what">LSP ของภาษาที่ไม่ได้ใช้ (clangd, gopls, java, kotlin, php, ruby, rust, swift) และตัวที่ต้องต่อ บริการภายนอก/มีค่าใช้จ่าย (asana, linear, greptile, firebase, gitlab, discord, telegram) — สั่งเพิ่มได้ทีหลัง</p><div></div></article><article class="row"><div></div><div class="name">ปิดของที่ไม่ใช้</div><p class="what">skill ที่มากับระบบและไม่เคยใช้ (docx, xlsx, morning, loop, init, review…) ปิดได้ที่ <code>~/.claude/settings.json</code> ด้วย <code>skillOverrides</code> ค่า <code>off</code> หรือ <code>name-only</code> — ประหยัดได้อีก ~1,100 tokens ต่อ session และย้อนกลับได้ทันที</p><div></div></article></div></section>
 <footer class="foot">
-<span>Source of truth: <code>~/.claude/skills/*/SKILL.md</code></span>
-<span>Rebuild: <code>python3 ~/.claude/skills-doc.py</code></span>
-<span>Pins and groups stay in this browser</span>
+<span>ต้นทาง: <code>~/.claude/skills/*/SKILL.md</code></span>
+<span>สร้างใหม่: <code>~/.claude/skills-publish.sh</code></span>
+<span>หมุดและกลุ่มเก็บไว้ในเบราว์เซอร์นี้</span>
 </footer></div>
 <div class="toast" id="toast" role="status"></div>
-<script>const DATA=[{"title": "Ship a unit", "blurb": "build, test on the machine, push — the daily plant workflow", "chain": ["localtest", "localtest-end", "buildup"], "skills": [{"name": "localtest", "summary": "Run the whole system (Node backend + built Flutter web) on the machine like production before deploy (real built asset, not debug/hot-reload)", "triggers": ["localtest <unit>", "โลคอลเทส", "ทดสอบก่อนขึ้นจริง", "รัน built front + backend บนเครื่อง"]}, {"name": "localtest-end", "summary": "Close a running localtest — kill backend+front, free the ports, restore UI config that points at localhost back to the real server. The closing counterpart of localtest", "triggers": ["localtest-end", "ปิด/หยุด/จบ localtest", "เลิกเทสแล้ว"]}, {"name": "buildup", "summary": "Deploy pipeline for Flutter web + Node: build → deploy into the DEPLOY repo → push 2 gits", "triggers": ["buildup <unit>", "buildup all", "บิลด์อัพ", "อัพขึ้นจริง"]}, {"name": "pushcode", "summary": "Commit + push source code to git safely (prevent secret/.env/build/node_modules leaks, verb-first message, pull --rebase before push). Separate from buildup (which pushes only DEPLOY)", "triggers": ["push code", "push ขึ้น git", "ดันโค้ดขึ้น", "commit แล้ว push"]}, {"name": "envlocal", "summary": "View/adjust `.env.local` + endpoint config as a table (each endpoint points to localhost or the real server) before/during localtest", "triggers": ["envlocal", "ดู .env.local", "config endpoint ชี้ไปไหน", "ปรับ env local"]}, {"name": "new-unit", "summary": "Create a new unit/plant from a clone (backend+UI+deploy), change all port/IP/names + grep old values down to 0 + add to the buildup/localtest table", "triggers": ["new unit", "สร้าง plant ใหม่", "clone unit ... เป็น ...", "เพิ่มหน่วยงานใหม่"]}]}, {"title": "Hold the standard", "blurb": "audit code against the central standard, then fix it", "chain": ["check-code-std", "convert-to-std"], "skills": [{"name": "gen-flutter-std", "summary": "Check Flutter performance against the FL- section in PERFORMANCE-STANDARD.md → report PASS/WARN/FAIL. Check only, no code changes", "triggers": ["gen flutter std", "ตรวจ flutter std", "audit flutter performance"]}, {"name": "gen-nodejs-std", "summary": "Check Node/Express backend performance against the ND- section → report PASS/WARN/FAIL. Check only, no code changes", "triggers": ["gen nodejs std", "ตรวจ node std", "audit backend performance"]}, {"name": "gen-flutter-nodejs-std", "summary": "Check fullstack performance (Flutter+Node) against FL-/ND-/FS- + the connection points + reference app T1–T5. Check/produce a spec, no code changes", "triggers": ["gen flutter+nodejs std", "ตรวจ fullstack std", "audit ระบบทั้ง front+back"]}, {"name": "check-code-std", "summary": "Audit code against the central standards (framework std + perf FL-/ND-/FS- + noti/login + security) and plan the fixes, before handing off to convert-to-std. Check + plan only, no code changes", "triggers": ["check code std", "ตรวจโค้ดตามมาตรฐาน", "audit code std", "เช็คโค้ดเทียบ std แล้ววางแผน"]}, {"name": "convert-to-std", "summary": "Actually change code to pass the performance standard (the FAIL items from gen ... std) — pilot one unit at a time + localtest before propagating. Unlike gen ... std, which only checks", "triggers": ["convert to std", "แก้ให้ผ่าน std", "fix ตามมาตรฐาน performance"]}]}, {"title": "How Claude answers", "blurb": "reply length and working discipline", "chain": [], "skills": [{"name": "terse", "summary": "Turn terse reply mode ON or OFF (short, low-token replies — no tables/decoration, still correct grammar)", "triggers": ["terse on", "terse off", "terse", "ตอบสั้น", "เปิดโหมดสั้น", "ปิดโหมดสั้น"]}, {"name": "caveman", "summary": "Turn caveman reply mode ON or OFF — ultra-short caveman speech to cut output tokens hard (\"file big. me fix. test pass.\")", "triggers": ["file big. me fix. test pass.", "caveman on", "caveman off", "caveman", "โหมดมนุษย์ถ้ำ"]}, {"name": "stop-slop", "summary": "Guard against AI slop and scope creep in one pass: cut filler/over-engineering/invented abstractions, and refuse work outside what was asked", "triggers": ["stop slop", "stop slope", "no slop", "อย่าบานปลาย", "ทำเฉพาะที่สั่ง", "เอาแบบไม่มโน"]}]}, {"title": "Manage the setup", "blurb": "what Claude remembers, what is running, what tools exist", "chain": [], "skills": [{"name": "claude-mem", "summary": "Inspect and manage what Claude loads every session — memory files, MEMORY.md index, CLAUDE.md — with a size/token report, plus add, prune, consolidate", "triggers": ["claude mem", "ดู memory", "จำอะไรไว้บ้าง", "ล้าง memory", "เพิ่ม memory", "memory status"]}, {"name": "task-observer", "summary": "Show what background work is running right now — subagents, workflows, background shell tasks, monitors — with status, elapsed time, and what is stuck", "triggers": ["task observer", "งานที่รันอยู่", "เช็คงานเบื้องหลัง", "workflow ถึงไหนแล้ว", "อะไรค้างอยู่"]}, {"name": "find-skill", "summary": "Find the right skill for a job — search installed skills first, then marketplaces, and say plainly if none fits (and whether to build one)", "triggers": ["find skill", "หา skill", "มี skill อะไรบ้าง", "skill ไหนใช้ดี", "skill for ..."]}, {"name": "dohandoff", "summary": "Summarize a session into a handoff document (what was done, design rationale, status, how to continue) so a person/AI can take over", "triggers": ["dohandoff", "ทำ handoff", "สรุปส่งต่องาน", "เขียน doc ให้คนอื่นทำต่อ"]}]}];
+<script>const DATA=[{"title": "งานประจำวัน — ส่งขึ้นจริง", "blurb": "บิลด์ · ทดสอบบนเครื่อง · push ขึ้น git", "chain": ["localtest", "localtest-end", "buildup"], "skills": [{"name": "localtest", "summary": "รันทั้งระบบบนเครื่องแบบ production (built asset จริง) ก่อน deploy", "triggers": ["localtest <unit>", "โลคอลเทส", "ทดสอบก่อนขึ้นจริง", "รัน built front + backend บนเครื่อง"]}, {"name": "localtest-end", "summary": "ปิด localtest ให้สะอาด คืนพอร์ต + คืน config UI ที่ชี้ localhost", "triggers": ["localtest-end", "ปิด/หยุด/จบ localtest", "เลิกเทสแล้ว"]}, {"name": "buildup", "summary": "บิลด์ Flutter web แล้ว deploy ขึ้น repo DEPLOY + push ทั้ง 2 git", "triggers": ["buildup <unit>", "buildup all", "บิลด์อัพ", "อัพขึ้นจริง"]}, {"name": "pushcode", "summary": "commit + push โค้ดต้นทางอย่างปลอดภัย กัน secret/build หลุด", "triggers": ["push code", "push ขึ้น git", "ดันโค้ดขึ้น", "commit แล้ว push"]}, {"name": "envlocal", "summary": "ดูตารางว่า endpoint ไหนชี้ localhost / ชี้ server จริง แล้วปรับได้", "triggers": ["envlocal", "ดู .env.local", "config endpoint ชี้ไปไหน", "ปรับ env local"]}, {"name": "new-unit", "summary": "สร้าง plant ใหม่จาก clone เปลี่ยน port/IP/ชื่อครบ + grep ค่าเก่าเหลือ 0", "triggers": ["new unit", "สร้าง plant ใหม่", "clone unit ... เป็น ...", "เพิ่มหน่วยงานใหม่"]}]}, {"title": "มาตรฐานโค้ด", "blurb": "ตรวจโค้ดเทียบมาตรฐานกลาง แล้วแก้ให้ผ่าน", "chain": ["check-code-std", "convert-to-std"], "skills": [{"name": "gen-flutter-std", "summary": "ตรวจ performance ฝั่ง Flutter ตามเกณฑ์ FL- ออกรายงาน PASS/WARN/FAIL", "triggers": ["gen flutter std", "ตรวจ flutter std", "audit flutter performance"]}, {"name": "gen-nodejs-std", "summary": "ตรวจ performance ฝั่ง Node ตามเกณฑ์ ND-", "triggers": ["gen nodejs std", "ตรวจ node std", "audit backend performance"]}, {"name": "gen-flutter-nodejs-std", "summary": "ตรวจทั้งระบบ FL-+ND-+FS- และเทียบ reference app T1–T5", "triggers": ["gen flutter+nodejs std", "ตรวจ fullstack std", "audit ระบบทั้ง front+back"]}, {"name": "check-code-std", "summary": "audit 5 มิติ (โครง/perf/noti-login/security/cross-check) แล้ววางแผนแก้", "triggers": ["check code std", "ตรวจโค้ดตามมาตรฐาน", "audit code std", "เช็คโค้ดเทียบ std แล้ววางแผน"]}, {"name": "convert-to-std", "summary": "ลงมือแก้โค้ดจริงให้ผ่านเกณฑ์ นำร่องทีละ unit + localtest ก่อนขยาย", "triggers": ["convert to std", "แก้ให้ผ่าน std", "fix ตามมาตรฐาน performance"]}]}, {"title": "วิธีที่ Claude ตอบ", "blurb": "ความยาวคำตอบ และวินัยการทำงาน", "chain": [], "skills": [{"name": "terse", "summary": "สลับโหมดตอบสั้น ประหยัด token ~40-50% ต่อคำตอบ", "triggers": ["terse on", "terse off", "terse", "ตอบสั้น", "เปิดโหมดสั้น", "ปิดโหมดสั้น"]}, {"name": "caveman", "summary": "โหมดมนุษย์ถ้ำ ตอบสั้นสุด ประหยัด ~60-70%", "triggers": ["file big. me fix. test pass.", "caveman on", "caveman off", "caveman", "โหมดมนุษย์ถ้ำ"]}, {"name": "stop-slop", "summary": "กันงานมโน/ฟุ่มเฟือย + กันงานบานปลายเกินที่สั่ง", "triggers": ["stop slop", "stop slope", "no slop", "อย่าบานปลาย", "ทำเฉพาะที่สั่ง", "เอาแบบไม่มโน"]}]}, {"title": "จัดการระบบ", "blurb": "ความจำ · งานเบื้องหลัง · เครื่องมือที่มี", "chain": [], "skills": [{"name": "claude-mem", "summary": "ดู/จัดการสิ่งที่ Claude จำไว้ + บอกว่ากิน token เท่าไรต่อ session", "triggers": ["claude mem", "ดู memory", "จำอะไรไว้บ้าง", "ล้าง memory", "เพิ่ม memory", "memory status"]}, {"name": "task-observer", "summary": "ดูงานเบื้องหลังทั้งหมดที่รันอยู่ + ตัวไหนค้าง", "triggers": ["task observer", "งานที่รันอยู่", "เช็คงานเบื้องหลัง", "workflow ถึงไหนแล้ว", "อะไรค้างอยู่"]}, {"name": "find-skill", "summary": "หา skill ที่ตรงกับงาน ในเครื่องก่อน แล้วค่อยหาใน marketplace", "triggers": ["find skill", "หา skill", "มี skill อะไรบ้าง", "skill ไหนใช้ดี", "skill for ..."]}, {"name": "dohandoff", "summary": "สรุป session เป็นเอกสารส่งต่อ ให้คน/AI อ่านแล้วทำต่อได้", "triggers": ["dohandoff", "ทำ handoff", "สรุปส่งต่องาน", "เขียน doc ให้คนอื่นทำต่อ"]}]}];
 const KEY = 'skills-doc-v1';
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
 let state = load();
@@ -158,22 +159,22 @@ function buildSections(){
   const pinned = visible.filter(s => state.pinned.includes(s.name));
   const rest = visible.filter(s => !state.pinned.includes(s.name));
   const out = [];
-  if (pinned.length) out.push({ title: 'Pinned', blurb: 'your shortlist — click the star to remove', chain: [], skills: pinned });
+  if (pinned.length) out.push({ title: 'ปักหมุดไว้', blurb: 'รายการที่ใช้บ่อย — กดดาวเพื่อเอาออก', chain: [], skills: pinned });
 
   if (state.mode === 'az'){
-    out.push({ title: 'A–Z', blurb: 'every skill, alphabetical', chain: [],
+    out.push({ title: 'เรียงตามตัวอักษร', blurb: 'ทุก skill เรียง A–Z', chain: [],
                skills: [...rest].sort((a,b) => a.name.localeCompare(b.name)) });
   } else if (state.mode === 'custom'){
     const buckets = {};
-    rest.forEach(s => { const g = state.custom[s.name] || 'Unsorted'; (buckets[g] = buckets[g] || []).push(s); });
-    Object.keys(buckets).sort().forEach(t => out.push({ title: t, blurb: 'your grouping', chain: [], skills: buckets[t] }));
+    rest.forEach(s => { const g = state.custom[s.name] || 'ยังไม่จัด'; (buckets[g] = buckets[g] || []).push(s); });
+    Object.keys(buckets).sort().forEach(t => out.push({ title: t, blurb: 'กลุ่มที่คุณจัดเอง', chain: [], skills: buckets[t] }));
   } else {
     DATA.forEach(g => {
       const skills = rest.filter(s => s.home === g.title);
       if (skills.length) out.push({ ...g, skills });
     });
   }
-  counter.textContent = visible.length + (visible.length === 1 ? ' skill' : ' skills');
+  counter.textContent = visible.length + (visible.length === 1 ? ' skill' : ' skill');
   return out;
 }
 
@@ -198,29 +199,29 @@ function render(){
       const row = document.createElement('article');
       row.className = 'row';
       row.innerHTML = `
-        <button class="pin" aria-pressed="${on}" title="${on ? 'Unpin' : 'Pin to top'}">${on ? '★' : '☆'}</button>
+        <button class="pin" aria-pressed="${on}" title="${on ? 'เอาหมุดออก' : 'ปักหมุดขึ้นบน'}">${on ? '★' : '☆'}</button>
         <div class="name">${esc(s.name)}</div>
         <p class="what">${esc(s.summary)}</p>
-        <select class="move" title="Move to a group">
+        <select class="move" title="ย้ายไปกลุ่มอื่น">
           ${names.map(n => `<option${(state.custom[s.name] || s.home) === n ? ' selected' : ''}>${esc(n)}</option>`).join('')}
           <option value="__new">+ new group…</option>
         </select>
-        <div class="say">${s.triggers.slice(0,6).map(t => `<code title="Click to copy">${esc(t)}</code>`).join('')}</div>`;
+        <div class="say">${s.triggers.slice(0,6).map(t => `<code title="คลิกเพื่อคัดลอก">${esc(t)}</code>`).join('')}</div>`;
       row.querySelector('.pin').onclick = () => {
         state.pinned = on ? state.pinned.filter(n => n !== s.name) : [...state.pinned, s.name];
-        save(); render(); toast(on ? 'Unpinned ' + s.name : 'Pinned ' + s.name);
+        save(); render(); toast(on ? 'เอาหมุดออก: ' + s.name : 'ปักหมุด: ' + s.name);
       };
       row.querySelector('.move').onchange = e => {
         let g = e.target.value;
         if (g === '__new'){
-          g = (prompt('New group name') || '').trim();
+          g = (prompt('ชื่อกลุ่มใหม่') || '').trim();
           if (!g){ render(); return; }
         }
         state.custom[s.name] = g; state.mode = 'custom'; modeSel.value = 'custom';
         save(); render(); toast(s.name + ' → ' + g);
       };
       row.querySelectorAll('.say code').forEach(c => {
-        c.onclick = () => { navigator.clipboard?.writeText(c.textContent); toast('Copied: ' + c.textContent); };
+        c.onclick = () => { navigator.clipboard?.writeText(c.textContent); toast('คัดลอกแล้ว: ' + c.textContent); };
       });
       rows.appendChild(row);
     });
@@ -233,8 +234,8 @@ function esc(t){ return String(t).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&l
 q.addEventListener('input', render);
 modeSel.addEventListener('change', () => { state.mode = modeSel.value; save(); render(); });
 document.getElementById('reset').onclick = () => {
-  if (!confirm('Clear your pins and custom groups?')) return;
-  state = { pinned: [], custom: {}, mode: 'flow' }; modeSel.value = 'flow'; save(); render(); toast('Reset');
+  if (!confirm('ล้างหมุดและกลุ่มที่จัดเองทั้งหมด?')) return;
+  state = { pinned: [], custom: {}, mode: 'flow' }; modeSel.value = 'flow'; save(); render(); toast('ล้างค่าแล้ว');
 };
 render();
 </script>
