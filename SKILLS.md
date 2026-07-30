@@ -1,6 +1,6 @@
 # Skills — command reference
 
-19 skills installed · about 1380 tokens of descriptions load at the start of every session.
+20 skills installed · about 1455 tokens of descriptions load at the start of every session.
 
 Generated from `~/.claude/skills/*/SKILL.md` by `skills-doc.py` — edit a skill, then re-run the script.
 
@@ -137,3 +137,13 @@ Say: `find skill` · `หา skill` · `มี skill อะไรบ้าง` �
 สรุป session เป็นเอกสารส่งต่อ ให้คน/AI อ่านแล้วทำต่อได้
 
 Say: `dohandoff` · `ทำ handoff` · `สรุปส่งต่องาน` · `เขียน doc ให้คนอื่นทำต่อ`
+
+## ยังไม่จัดกลุ่ม
+
+_เพิ่งเพิ่มเข้ามา — จัดกลุ่มเมื่อรู้ว่าใช้ยังไง_
+
+### localtest-s
+
+localtest variant where the backend keeps pointing at the DB on the server (no local DB, no editing the mongo/mssql helpers)
+
+Say: `localtest-s <unit>` · `localtest -s` · `โลคอลเทสแบบ DB server` · `เทสแต่ใช้ DB บนเซิร์ฟเวอร์`

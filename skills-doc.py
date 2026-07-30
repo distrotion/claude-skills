@@ -364,6 +364,27 @@ def write_html(groups, total, count, stamp):
         f'<span class="count" id="count">{count} skill</span>',
         "</div>",
         '<main id="app"></main>',
+        '<section class="group"><div class="group-head"><h2>ทีม Agent — เลือก model ตามงานอัตโนมัติ</h2>'
+        '<p>งาน routine ไม่ต้องจ่ายราคา Opus อีกต่อไป · ตั้งไว้ที่ <code>~/.claude/agents/</code></p></div>'
+        '<div class="rows">'
+        '<article class="row"><div></div><div class="name">scan · Haiku</div>'
+        '<p class="what">grep · นับ · list · หาไฟล์/พอร์ต — งานกลไกล้วน read-only ห้ามแก้อะไร '
+        'ถูกที่สุด เร็วที่สุด</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">research · Sonnet</div>'
+        '<p class="what">อ่านเอกสาร/เว็บ/โค้ดที่ไม่คุ้น แล้วสรุปพร้อม citation — ห้ามมโนชื่อ setting '
+        'หรือ package ถ้ายืนยันไม่ได้ต้องบอกว่า unverified</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">audit · Opus</div>'
+        '<p class="what">ตัดสินเรื่องเสี่ยง — security, architecture, ตรวจหักล้างข้อสรุป '
+        'ใช้เท่าที่จำเป็น เพราะแพงสุดในสามตัว</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">Fable 5 — ใช้เมื่อไร</div>'
+        '<p class="what">อยู่ <b>เหนือ Opus</b> (Mythos-class) ฉลาดสุดแต่ใช้ credit และคิวเต็มบ่อย — '
+        'เก็บไว้ตอนเจอปัญหายากจริงที่ Opus แก้ไม่ได้ <b>ห้ามใช้กับงานประจำวัน</b> '
+        'งานทั่วไปควรอยู่ที่ Sonnet 5</p><div></div></article>'
+        '<article class="row"><div></div><div class="name">เปิดใช้ยังไง</div>'
+        '<p class="what">ไม่ต้องทำอะไรเลย — ทีมนี้ทำงานเองตั้งแต่ session ถัดไป Claude จะโยนงานให้ตัวที่ถูก '
+        'ตามกฎใน CLAUDE.md · ถ้าอยากสั่งเอง พิมพ์ได้ตรง ๆ เช่น «ใช้ scan หาไฟล์...» · '
+        'ปรับ model ของตัวไหนก็แก้บรรทัด <code>model:</code> ในไฟล์ของ agent นั้น</p><div></div></article>'
+        '</div></section>',
         '<section class="group"><div class="group-head"><h2>สรุปการตั้งค่า</h2>'
         '<p>สิ่งที่ทำไว้ให้ประหยัด token และของที่เพิ่งลงเพิ่ม</p></div>'
         '<div class="rows">'
