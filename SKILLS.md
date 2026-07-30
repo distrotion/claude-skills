@@ -1,6 +1,6 @@
 # Skills — command reference
 
-18 skills installed · about 1285 tokens of descriptions load at the start of every session.
+19 skills installed · about 1380 tokens of descriptions load at the start of every session.
 
 Generated from `~/.claude/skills/*/SKILL.md` by `skills-doc.py` — edit a skill, then re-run the script.
 
@@ -75,6 +75,12 @@ Say: `gen flutter+nodejs std` · `ตรวจ fullstack std` · `audit ระ�
 audit 5 มิติ (โครง/perf/noti-login/security/cross-check) แล้ววางแผนแก้
 
 Say: `check code std` · `ตรวจโค้ดตามมาตรฐาน` · `audit code std` · `เช็คโค้ดเทียบ std แล้ววางแผน`
+
+### secupy
+
+ปิดช่อง broken access control — endpoint ไม่มี auth, สิทธิ์ตัดสินฝั่ง UI, ไม่ส่ง token (แก้แบบไม่ทำระบบล่ม)
+
+Say: `secupy` · `ปิดช่อง security` · `endpoint ไม่มี auth` · `แก้ security` · `client-side auth`
 
 ### convert-to-std
 

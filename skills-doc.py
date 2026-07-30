@@ -36,6 +36,7 @@ TH = {
  "claude-mem":"ดู/จัดการสิ่งที่ Claude จำไว้ + บอกว่ากิน token เท่าไรต่อ session",
  "task-observer":"ดูงานเบื้องหลังทั้งหมดที่รันอยู่ + ตัวไหนค้าง",
  "find-skill":"หา skill ที่ตรงกับงาน ในเครื่องก่อน แล้วค่อยหาใน marketplace",
+ "secupy":"ปิดช่อง broken access control — endpoint ไม่มี auth, สิทธิ์ตัดสินฝั่ง UI, ไม่ส่ง token (แก้แบบไม่ทำระบบล่ม)",
  "dohandoff":"สรุป session เป็นเอกสารส่งต่อ ให้คน/AI อ่านแล้วทำต่อได้",
 }
 
@@ -44,7 +45,7 @@ GROUPS = [
     ("งานประจำวัน — ส่งขึ้นจริง", "บิลด์ · ทดสอบบนเครื่อง · push ขึ้น git",
      ["localtest", "localtest-end", "buildup", "pushcode", "envlocal", "new-unit"]),
     ("มาตรฐานโค้ด", "ตรวจโค้ดเทียบมาตรฐานกลาง แล้วแก้ให้ผ่าน",
-     ["gen-flutter-std", "gen-nodejs-std", "gen-flutter-nodejs-std", "check-code-std", "convert-to-std"]),
+     ["gen-flutter-std", "gen-nodejs-std", "gen-flutter-nodejs-std", "check-code-std", "secupy", "convert-to-std"]),
     ("วิธีที่ Claude ตอบ", "ความยาวคำตอบ และวินัยการทำงาน",
      ["terse", "caveman", "stop-slop"]),
     ("จัดการระบบ", "ความจำ · งานเบื้องหลัง · เครื่องมือที่มี",
