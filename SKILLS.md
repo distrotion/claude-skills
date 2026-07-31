@@ -1,6 +1,6 @@
 # Skills — command reference
 
-20 skills installed · about 1455 tokens of descriptions load at the start of every session.
+21 skills installed · about 1548 tokens of descriptions load at the start of every session.
 
 Generated from `~/.claude/skills/*/SKILL.md` by `skills-doc.py` — edit a skill, then re-run the script.
 
@@ -113,6 +113,12 @@ Say: `stop slop` · `stop slope` · `no slop` · `อย่าบานปลา
 ## จัดการระบบ
 
 _ความจำ · งานเบื้องหลัง · เครื่องมือที่มี_
+
+### newsession
+
+ล้าง context ในหน้าต่างเดิม — เก็บ handoff ให้ก่อน แล้วสั่ง /clear ต่องานได้เลย
+
+Say: `newsession` · `เริ่มใหม่` · `ล้าง context` · `reset session` · `รีเซ็ต`
 
 ### claude-mem
 
