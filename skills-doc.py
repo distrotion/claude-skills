@@ -37,7 +37,7 @@ TH = {
  "task-observer":"ดูงานเบื้องหลังทั้งหมดที่รันอยู่ + ตัวไหนค้าง",
  "find-skill":"หา skill ที่ตรงกับงาน ในเครื่องก่อน แล้วค่อยหาใน marketplace",
  "secupy":"ปิดช่อง broken access control — endpoint ไม่มี auth, สิทธิ์ตัดสินฝั่ง UI, ไม่ส่ง token (แก้แบบไม่ทำระบบล่ม)",
- "newsession":"ล้าง context ในหน้าต่างเดิม — เก็บ handoff ให้ก่อน แล้วสั่ง /clear ต่องานได้เลย",
+ "nextpls":"จบรอบงาน — เก็บความรู้เป็น graph, คง progress, เขียน handoff, ปรับ model/โหมดให้เหมาะ แล้วล้าง context ต่อรอบใหม่ได้เรื่อย ๆ",
  "dohandoff":"สรุป session เป็นเอกสารส่งต่อ ให้คน/AI อ่านแล้วทำต่อได้",
 }
 
@@ -50,7 +50,7 @@ GROUPS = [
     ("วิธีที่ Claude ตอบ", "ความยาวคำตอบ และวินัยการทำงาน",
      ["terse", "caveman", "stop-slop"]),
     ("จัดการระบบ", "ความจำ · งานเบื้องหลัง · เครื่องมือที่มี",
-     ["newsession", "claude-mem", "task-observer", "find-skill", "dohandoff"]),
+     ["nextpls", "claude-mem", "task-observer", "find-skill", "dohandoff"]),
 ]
 
 # Real sequences worth drawing as a chain (order carries meaning).
